@@ -56,7 +56,25 @@ const reducer = (state, action) => {
   if (action.type === "DISPLAY-ITEM") {
     return { ...state, cart: action.payload, loading: false };
   }
-  return state;
+
+  if (action.type === "TOGGEL_AMOUNT") {
+    let addition = state.cart
+      .map((cartItem) => {
+        if (cartItem.id === action.payload.id) {
+        }
+        if (action.payload.type === "inc") {
+          return { ...cartItem, amount: cartItem.amount + 1 };
+        }
+        if (action.payload.type === "dec") {
+          return { ...cartItem, amount: cartItem.amount - 1 };
+        }
+        return cartItem;
+      })
+      .filter((cartItem) => cartItem.amount !== 0);
+
+    return { ...state, cart: addition };
+  }
+  throw new Error("no catching action type ");
 };
 
 export default reducer;

@@ -38,6 +38,10 @@ const AppProvider = ({ children }) => {
 
     dispatch({ type: "DISPLAY-ITEM", payload: cart });
   };
+
+  const toggel = (id, type) => {
+    dispatch({ type: "TOGGEL_AMOUNT", payload: { id, type } });
+  };
   useEffect(() => {
     fetchData();
   }, []);
@@ -53,6 +57,7 @@ const AppProvider = ({ children }) => {
         removeItem,
         add,
         sub,
+        toggel,
       }}
     >
       {children}
